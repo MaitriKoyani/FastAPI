@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% block body %}
+<div class="text-center js-copytextarea" >{{user.room_code}}</div>
+<button class="btn btn-outline-light js-textareacopybtn">copy</button>
+room{{users}}
+<a href="{{url_for('logout')}}" class="btn btn-outline-light">Exit</a>
+<script>
+   var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+copyTextareaBtn.addEventListener('click', function(event) {
+  var textElement = document.querySelector('.js-copytextarea');
+  var textToCopy = textElement.innerText || textElement.value; // Works for div, span, textarea
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(textToCopy).then(function() {
+        console.log('Text copied successfully!');
+      }).catch(function(err) {
+        console.error('Failed to copy:', err);
+      });
+    } else {
+      // Fallback for older browsers
+      var tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      try {
+        document.execCommand('copy');
+        console.log('Text copied successfully!');
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+      document.body.removeChild(tempTextArea);
+    }
+});
+</script>
+{% endblock %}

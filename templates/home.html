@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+
+{% block maintitle %}
+{% endblock %}
+
+{% block title %}
+
+    <!-- add title -->
+    Welcome in the Bingo World!
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container p-5">
+        <form method="post" action="{{url_for('create_room')}}">
+        <div class="row">
+            <div class="mb-4 col">
+                <label for="name" class="col-4">Name</label>
+                <input type="text" class="col" name="username" id="name" placeholder="Enter your name" value="{{name}}" required>
+            </div>
+            <div class="mb-4 col">
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="mb-4 col-6">
+                <label for="code" class="col-4">Code</label>
+                <input type="text" class="col" name="room_code" id="code" placeholder="Enter the room code" value="{{code}}">
+            </div>
+            <div class="mb-4 col-5">
+                <button type="submit" class="btn" style="background-color: rgb(210, 200, 190); color: #221022; font-family: cursive;">Join Room</button>
+            </div>    
+        </div>
+        <div class="row">
+            <div class="mb-4">
+                If you don't have a room code, you can create one
+            </div>
+            <div class="mb-4">
+                <button type="submit" class="btn fw-bold fs-5" style="background-color: rgb(156, 177, 203); color: #221022;font-family: cursive;">Create Room</button>
+            </div>
+        </div>
+        </form>
+    </div>
+
+    
+{% endblock %}

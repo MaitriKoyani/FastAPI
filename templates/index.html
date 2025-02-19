@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block maintitle %}
+
+            <!-- add title -->
+            
+    {% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        body{
+            
+            background-image: url("https://t3.ftcdn.net/jpg/05/00/25/46/360_F_500254607_T7K7ZOy9Un7mlXSeVfuMtDucT6g8mhaB.jpg");
+            height: 900px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            
+        }
+    </style>
+</head>
+<body>
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid px-5">
+          <a class="navbar-brand" href="#">AsUWis</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item mx-3">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav me-4 ">
+                  <li class="nav-item">
+                      {% if request %}
+                      <a class="me-2 btn btn-outline-light" aria-current="page" href="/logout/">Logout</a>
+                      {% else %}
+                      <a class=" me-2 btn btn-outline-light" aria-current="page" href="/login/">Login</a>
+                      {% endif %}
+                  </li>
+                </ul>
+          </div>
+        </div>
+      </nav> -->
+    
+    {% block msg %}
+    {% endblock %}
+    <div class="bg">
+        <h2 class="text-center m-3 p-3 " style="color: rgb(60, 49, 61);text-shadow: rgb(22, 6, 32) 0.1em 0.1em 0.2em;">
+            {% block title %}
+    
+                <!-- add title -->
+                
+            {% endblock %}
+        </h2>
+        <div class="h-50 w-50  d-inline-block text-center border border-secondary border-3 rounded bg-dark text-light top-50 start-50 position-absolute translate-middle  p-5 m-2 ">
+            {% block body %}
+            {% endblock %}
+        </div>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
