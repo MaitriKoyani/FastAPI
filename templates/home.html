@@ -11,18 +11,17 @@
 {% endblock %}
 
 {% block body %}
+    {% block msg %}
+    
+        {{status}}
 
+    {% endblock %}
     <div class="container p-5">
-        <form method="post" action="{{url_for('create_room')}}">
-        <div class="row">
-            <div class="mb-4 col">
-                <label for="name" class="col-4">Name</label>
-                <input type="text" class="col" name="username" id="name" placeholder="Enter your name" value="{{name}}" required>
-            </div>
-            <div class="mb-4 col">
-            </div>
-            
-        </div>
+        <form method="post" action="{{url_for('create_room',username=name)}}">
+        
+                <label for="name" class="col-4">{{name}}</label>
+       
+
         <div class="row">
             <div class="mb-4 col-6">
                 <label for="code" class="col-4">Code</label>
@@ -34,10 +33,10 @@
         </div>
         <div class="row">
             <div class="mb-4">
-                If you don't have a room code, you can create one
+                If you don't have a room code, you can host a game
             </div>
             <div class="mb-4">
-                <button type="submit" class="btn fw-bold fs-5" style="background-color: rgb(156, 177, 203); color: #221022;font-family: cursive;">Create Room</button>
+                <button type="submit" class="btn fw-bold fs-5" style="background-color: rgb(156, 177, 203); color: #221022;font-family: cursive;">Host A Game</button>
             </div>
         </div>
         </form>
