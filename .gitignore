@@ -2,3 +2,5 @@ venv/
 sessions.db
 __pycache__
 static
+alembic/
+alembic.ini

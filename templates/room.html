@@ -4,6 +4,8 @@
 <button class="btn btn-outline-light js-textareacopybtn">copy</button>
 room{{users}}
 <a href="{{url_for('logout')}}" class="btn btn-outline-light">Exit</a>
+<a href="{{url_for('join_room',username=user.username)}}" class="btn btn-outline-light">Join Room</a>
+
 <script>
    var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
 

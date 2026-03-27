@@ -19,15 +19,15 @@ html = """
         <ul id='messages'>
         </ul>
         <script>
-            var client_id = Date.now()
-            document.querySelector("#ws-id").textContent = client_id;
-            var ws = new WebSocket(`ws://localhost:8000/ws/${client_id}`);
+            var username = {username}
+            document.querySelector("#ws-id").textContent = username;
+            var ws = new WebSocket(`ws://localhost:8000/ws/${username}`);
             ws.onmessage = function(event) {
                 var messages = document.getElementById('messages')
-                var message = document.createElement('li')
+                var number = document.createElement('li')
                 var content = document.createTextNode(event.data)
-                message.appendChild(content)
-                messages.appendChild(message)
+                number.appendChild(content)
+                messages.appendChild(number)
             };
             function sendMessage(event) {
                 var input = document.getElementById("messageText")
@@ -52,30 +52,31 @@ class ConnectionManager:
     def disconnect(self, websocket: WebSocket):
         self.active_connections.remove(websocket)
 
-    async def send_personal_message(self, message: str, websocket: WebSocket):
-        await websocket.send_text(message)
+    async def send_personal_message(self, number: int, websocket: WebSocket):
+        await websocket.send_text(number)
 
-    async def broadcast(self, message: str):
+    async def broadcast(self, number: int):
         for connection in self.active_connections:
-            await connection.send_text(message)
+            await connection.send_text(number)
 
 
 manager = ConnectionManager()
 
 
-@app.get("/")
-async def get():
-    return HTMLResponse(html)
+@app.get("/{username}")
+async def get(username: str):
+    content = html.replace("{username}", f'"{username}"')
+    return HTMLResponse(content=content)
 
 
-@app.websocket("/ws/{client_id}")
-async def websocket_endpoint(websocket: WebSocket, client_id: int):
+@app.websocket("/ws/{username}")
+async def websocket_endpoint(websocket: WebSocket, username: str):
     await manager.connect(websocket)
     try:
         while True:
             data = await websocket.receive_text()
             await manager.send_personal_message(f"You wrote: {data}", websocket)
-            await manager.broadcast(f"Client #{client_id} says: {data}")
+            await manager.broadcast(f"Client #{username} says: {data}")
     except WebSocketDisconnect:
         manager.disconnect(websocket)
-        await manager.broadcast(f"Client #{client_id} left the chat")
+        await manager.broadcast(f"Client #{username} left the chat")
